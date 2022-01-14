@@ -1,0 +1,25 @@
+{
+  "name": "sdc_reviews_api",
+  "version": "1.0.0",
+  "description": "sdc_reviews_api",
+  "main": "schema.sql",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./server/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Confident-Cashew-SDC/Reviews-API.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Confident-Cashew-SDC/Reviews-API/issues"
+  },
+  "homepage": "https://github.com/Confident-Cashew-SDC/Reviews-API#readme",
+  "dependencies": {
+    "express": "^4.17.2",
+    "pg": "^8.7.1",
+    "pg-promise": "^10.11.1"
+  }
+}

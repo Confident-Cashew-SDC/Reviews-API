@@ -1,7 +1,10 @@
-const pg = require('pg');
-const config = require('./config.js')
-const pgClient = new pg.Client(config)
-const db = pgClient.connect();
+const { Client } = require('pg');
+const client = new Client({
+  user: 'catherine91033',
+  database: 'reviews',
+  port: 5432
+})
+const db = client.connect();
 
 
 db
@@ -11,4 +14,4 @@ db
     console.log(err);
   });
 
-module.exports = db;
+module.exports = client;

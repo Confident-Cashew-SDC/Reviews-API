@@ -8,6 +8,7 @@ run `\COPY characteristics_reviews FROM '/Users/catherine91033/Desktop/HRSF139.n
 run `\COPY reviews_photos FROM '/Users/catherine91033/Desktop/HRSF139.nosync/SDC_Reviews_API/data/reviews_photos.csv' DELIMITER ',' CSV HEADER`
 */
 
+
 DROP DATABASE IF EXISTS reviews;
 
 CREATE DATABASE reviews;
@@ -19,6 +20,7 @@ CREATE TABLE reviews (
   product_id INTEGER DEFAULT NULL,
   rating INTEGER DEFAULT NULL,
   date BIGINT DEFAULT NULL,
+  -- date timestamp with time zone USING to_timestamp(date/1000),
   summary VARCHAR DEFAULT NULL,
   body VARCHAR DEFAULT NULL,
   recommend VARCHAR DEFAULT NULL,
@@ -58,6 +60,7 @@ CREATE TABLE reviews_photos (
 -- Foreign Keys
 -- ---
 
+-- ALTER TABLE reviews ALTER COLUMN date SET DATA TYPE timestamp with time zone USING to_timestamp(date/1000);
 ALTER TABLE characteristics_reviews ADD FOREIGN KEY (review_id) REFERENCES reviews (id);
 ALTER TABLE characteristics_reviews ADD FOREIGN KEY (characteristic_id) REFERENCES characteristics (id);
 ALTER TABLE reviews_photos ADD FOREIGN KEY (review_id) REFERENCES reviews (id);
