@@ -20,3 +20,9 @@ FULL OUTER JOIN reviews_photos ON (reviews_photos.review_id = reviews.id)
 ORDER BY reviews.id ASC;
 
 CREATE INDEX ON reviews3(product_id);
+
+CREATE TABLE meta AS
+SELECT characteristics_reviews.*, characteristics.name, characteristics.id AS characteristics_id, reviews.recommend, reviews.product_id from characteristics_reviews
+INNER JOIN characteristics ON (characteristics_reviews.characteristic_id = characteristics.id)
+LEFT JOIN reviews ON (characteristics_reviews.review_id = reviews.id)
+ORDER BY reviews.id ASC;

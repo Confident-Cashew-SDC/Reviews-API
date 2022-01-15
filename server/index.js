@@ -36,6 +36,31 @@ app.get('/reviews', async (req, res) => {
   res.status(200).send(final);
 })
 
+app.get('/reviews/meta', async (req, res) => {
+  const text = 'SELECT * FROM meta WHERE product_id=1';
+  const result = await query(text);
+  console.log('query.rows:', result.rows);
+  const final = {};
+  final.product_id = result.rows[0].product_id;
+  const ratings = {};
+  const recommended = {};
+  for (let i = 0; i < result.rows.length; i++) {
+    if (!ratings[result.rows[i].value]) {
+      ratings[result.rows[i].value] = 1
+    } else {
+      ratings[result.rows[i].value]++
+    }
+    if (!recommended[result.rows[i].recommend]) {
+      recommended[result.rows[i].recommend] = 1
+    } else {
+      recommended[result.rows[i].recommend]++
+    }
+  }
+  final.ratings = ratings;
+  final.recommended = recommended;
+  res.status(200).send(final)
+})
+
 
 app.listen(PORT, () => {
   console.log(`Server listening on port: ${PORT}`)
