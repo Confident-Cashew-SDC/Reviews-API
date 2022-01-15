@@ -20,7 +20,6 @@ CREATE TABLE reviews (
   product_id INTEGER DEFAULT NULL,
   rating INTEGER DEFAULT NULL,
   date BIGINT DEFAULT NULL,
-  -- date timestamp with time zone USING to_timestamp(date/1000),
   summary VARCHAR DEFAULT NULL,
   body VARCHAR DEFAULT NULL,
   recommend VARCHAR DEFAULT NULL,
