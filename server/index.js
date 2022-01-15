@@ -15,7 +15,6 @@ const query = async (text, params) => {
 app.get('/reviews', async (req, res) => {
   const text = 'SELECT * FROM reviews3 WHERE product_id=2';
   const result = await query(text);
-  console.log('query.rows:', result.rows);
   const final = {};
   final.product = result.rows[0].product_id;
   final.results = [];
@@ -39,9 +38,7 @@ app.get('/reviews', async (req, res) => {
 app.get('/reviews/meta', async (req, res) => {
   const text = 'SELECT * FROM meta WHERE product_id=1';
   const result = await query(text);
-  console.log('query.rows:', result.rows);
   const final = {};
-  final.product_id = result.rows[0].product_id;
   const ratings = {};
   const recommended = {};
   for (let i = 0; i < result.rows.length; i++) {
@@ -56,6 +53,7 @@ app.get('/reviews/meta', async (req, res) => {
       recommended[result.rows[i].recommend]++
     }
   }
+  final.product_id = result.rows[0].product_id;
   final.ratings = ratings;
   final.recommended = recommended;
   res.status(200).send(final)
