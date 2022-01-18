@@ -138,10 +138,6 @@ app.get('/reviews/meta', async (req, res) => {
 
 app.post('/reviews', async (req, res) => {
   const params = [req.body.product_id, req.body.rating, req.body.summary, req.body.body, req.body.recommend, req.body.name, req.body.email]
-  //insert into reviews table first and return the review_id, then insert into reviews_photos table w/ review_id,
-  //select characteristic_id using product_id and characteristic_name from characteristic table
-  //if not exist, then create new one
-  //insert into characteristic_reviews table with characteristic_id & review_id & value
   const text =
   `INSERT INTO reviews
       (product_id, rating, date, summary, body, recommend, reviewer_name, reviewer_email)
@@ -182,6 +178,36 @@ app.post('/reviews', async (req, res) => {
     })
 })
 
+
+app.put('/reviews/helpful', async (req, res) => {
+  const params = [req.body.review_id]
+  const text =
+  `UPDATE reviews
+  SET helpfulness=helpfulness + 1
+  WHERE review_id=$1`
+  query(text, params)
+    .then((data) => {
+      res.status(204).send(data)
+    })
+    .catch((err) => {
+      res.status(500).send(err)
+    })
+})
+
+app.put('/reviews/report', async (req, res) => {
+  const params = [req.body.review_id]
+  const text =
+  `UPDATE reviews
+  SET reported=true
+  WHERE review_id=$1`
+  query(text, params)
+    .then((data) => {
+      res.status(204).send(data)
+    })
+    .catch((err) => {
+      res.status(500).send(err)
+    })
+})
 
 app.listen(PORT, () => {
   console.log(`Server listening on port: ${PORT}`)
