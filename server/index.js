@@ -3,6 +3,7 @@ const app = express();
 const PORT = 3000
 const client = require('../database/connection.js')
 const path = require('path')
+app.use(express.json())
 
 const query = async (text, params) => {
   const start = Date.now()
@@ -136,6 +137,49 @@ app.get('/reviews/meta', async (req, res) => {
 })
 
 app.post('/reviews', async (req, res) => {
+  const params = [req.body.product_id, req.body.rating, req.body.summary, req.body.body, req.body.recommend, req.body.name, req.body.email]
+  //insert into reviews table first and return the review_id, then insert into reviews_photos table w/ review_id,
+  //select characteristic_id using product_id and characteristic_name from characteristic table
+  //if not exist, then create new one
+  //insert into characteristic_reviews table with characteristic_id & review_id & value
+  const text =
+  `INSERT INTO reviews
+      (product_id, rating, date, summary, body, recommend, reviewer_name, reviewer_email)
+    VALUES
+      ($1, $2, CURRENT_DATE, $3, $4, $5, $6, $7)
+    RETURNING review_id AS review_id;`
+  query(text, params)
+    .then((data) => {
+      if (req.body.photos.length > 0) {
+        req.body.photos.forEach((photo) => {
+          const params = [data.rows[0].review_id, photo.url]
+          const text =
+          `INSERT INTO reviews_photos
+              (review_id, url)
+            VALUES
+              ($1, $2)`
+          query(text, params)
+        })
+      }
+      if (Object.keys(req.body.characteristics).length > 0) {
+        for (let key in req.body.characteristics) {
+          const params = [data.rows[0].review_id, key, req.body.characteristics[key].value]
+          const text =
+          `INSERT INTO characteristics_reviews
+            (characteristic_id, review_id, value)
+          VALUES
+            ((SELECT characteristic_id FROM characteristics
+              WHERE (product_id=${req.body.product_id} AND name=$2)), $1, $3)`
+          query(text, params)
+        }
+      }
+    })
+    .then((data) => {
+      res.status(201).send(data)
+    })
+    .catch((err) => {
+      res.status(500).send(err)
+    })
 })
 
 

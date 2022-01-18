@@ -59,3 +59,8 @@ CREATE TABLE reviews_photos (
 ALTER TABLE characteristics_reviews ADD FOREIGN KEY (review_id) REFERENCES reviews (review_id);
 ALTER TABLE characteristics_reviews ADD FOREIGN KEY (characteristic_id) REFERENCES characteristics (characteristic_id);
 ALTER TABLE reviews_photos ADD FOREIGN KEY (review_id) REFERENCES reviews (review_id);
+
+SELECT setval(pg_get_serial_sequence('reviews', 'review_id'), coalesce(max(review_id), 0)+1 , false) FROM reviews;
+SELECT setval(pg_get_serial_sequence('reviews_photos', 'photos_id'), coalesce(max(photos_id), 0)+1 , false) FROM reviews_photos;
+SELECT setval(pg_get_serial_sequence('characteristics', 'characteristic_id'), coalesce(max(characteristic_id), 0)+1 , false) FROM characteristics;
+SELECT setval(pg_get_serial_sequence('characteristics_reviews', 'char_rev_id'), coalesce(max(char_rev_id), 0)+1 , false) FROM characteristics_reviews;
