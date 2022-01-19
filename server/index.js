@@ -16,10 +16,16 @@ app.use(express.json())
 
 app.get('/reviews', async (req, res) => {
   const product_id = req.query.product_id
+  const sort = req.query.sort === 'relevant' ? 'helpfulness DESC, DATE DESC' :
+               req.query.sort === 'helpful' ? 'helpfulness DESC' : 'date DESC';
+  const page = req.query.page
+  const count = req.query.count
   const params = [product_id]
   const text =
   `SELECT json_build_object(
     'product', ${product_id},
+    'page', ${page},
+    'count', ${count},
     'results', json_agg(
       json_build_object(
         'review_id', r.review_id,
@@ -31,11 +37,12 @@ app.get('/reviews', async (req, res) => {
         'date', r.date,
         'reviewer_name', r.reviewer_name,
         'helpfulness', r.helpfulness
-      )
+      ) ORDER BY ${sort}
     )
   )
   FROM reviews r
-  WHERE r.product_id=$1`
+  WHERE r.product_id=$1
+  LIMIT ${count}`
   let review = {};
   query(text, params)
     .then((res) => {
@@ -72,6 +79,7 @@ app.get('/reviews', async (req, res) => {
       res.status(200).send(review)
     })
     .catch((err) => {
+      console.log(err)
       res.status(500).send(err)
     })
 })
