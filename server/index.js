@@ -18,14 +18,15 @@ app.get('/reviews', async (req, res) => {
   const product_id = req.query.product_id
   const sort = req.query.sort === 'relevant' ? 'helpfulness DESC, DATE DESC' :
                req.query.sort === 'helpful' ? 'helpfulness DESC' : 'date DESC';
-  const page = req.query.page
-  const count = req.query.count
+  const page = req.query.page ? `'page', ${req.query.page},` : '' ;
+  const count = req.query.count ? `'count', ${req.query.count},` : '' ;
+  const limitCount = req.query.count ? `LIMIT ${req.query.count}` : '' ;
   const params = [product_id]
   const text =
   `SELECT json_build_object(
     'product', ${product_id},
-    'page', ${page},
-    'count', ${count},
+    ${page}
+    ${count}
     'results', json_agg(
       json_build_object(
         'review_id', r.review_id,
@@ -42,7 +43,7 @@ app.get('/reviews', async (req, res) => {
   )
   FROM reviews r
   WHERE r.product_id=$1
-  LIMIT ${count}`
+  ${limitCount}`
   let review = {};
   query(text, params)
     .then((res) => {
@@ -79,7 +80,6 @@ app.get('/reviews', async (req, res) => {
       res.status(200).send(review)
     })
     .catch((err) => {
-      console.log(err)
       res.status(500).send(err)
     })
 })
