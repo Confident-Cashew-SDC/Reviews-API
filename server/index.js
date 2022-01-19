@@ -3,7 +3,6 @@ const app = express();
 const PORT = 3000
 const client = require('../database/connection.js')
 const path = require('path')
-app.use(express.json())
 
 const query = async (text, params) => {
   const start = Date.now()
@@ -12,6 +11,8 @@ const query = async (text, params) => {
   console.log('executed query', { text, duration, rows: res.rowCount })
   return res
 }
+
+app.use(express.json())
 
 app.get('/reviews', async (req, res) => {
   const product_id = req.query.product_id
@@ -212,3 +213,5 @@ app.put('/reviews/report', async (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server listening on port: ${PORT}`)
 })
+
+module.exports = app;
