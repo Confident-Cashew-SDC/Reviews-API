@@ -44,8 +44,8 @@ export default function () {
     product_id: randomID,
     sort: randomSort
   }
-  http.get(`http://localhost:3000/reviews?product_id=${params.product_id}?sort=${params.sort}`);
-  sleep(1);
+  // http.get(`http://localhost:3000/reviews?product_id=${params.product_id}&sort=${params.sort}`);
+  // sleep(1);
   http.get(`http://localhost:3000/reviews/meta?product_id=${params.product_id}`);
   sleep(1);
 }
