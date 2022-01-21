@@ -4,6 +4,7 @@ const app = express();
 const PORT = 3000
 const client = require('../database/connection.js')
 const path = require('path')
+const TOKEN = require('../config.js')
 
 const query = async (text, params) => {
   const start = Date.now()
@@ -14,6 +15,10 @@ const query = async (text, params) => {
 }
 
 app.use(express.json())
+
+app.get(`/${TOKEN}`, (req, res) => {
+  res.status(200).send(`${TOKEN}`)
+});
 
 app.get('/reviews', async (req, res) => {
   const product_id = req.query.product_id
