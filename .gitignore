@@ -2,3 +2,4 @@ data
 node_modules
 .env
 config.js
+newrelic_agent.log
