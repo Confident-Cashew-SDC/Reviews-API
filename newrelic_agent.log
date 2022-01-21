@@ -200,3 +200,14 @@
 {"v":0,"level":30,"name":"newrelic","hostname":"catherines-mbp.lan","pid":36671,"time":"2022-01-21T20:43:19.877Z","msg":"Valid event_harvest_config received. Updating harvest cycles. {\"report_period_ms\":5000,\"harvest_limits\":{\"error_event_data\":8,\"analytic_event_data\":833,\"custom_event_data\":83}}"}
 {"v":0,"level":30,"name":"newrelic","hostname":"catherines-mbp.lan","pid":36671,"time":"2022-01-21T20:43:19.881Z","msg":"Agent state changed from connected to started."}
 {"v":0,"level":30,"name":"newrelic","hostname":"catherines-mbp.lan","pid":36671,"time":"2022-01-21T20:43:20.882Z","msg":"Starting initial 1000ms harvest."}
+{"v":0,"level":30,"name":"newrelic","hostname":"catherines-mbp.lan","pid":36877,"time":"2022-01-21T20:52:27.842Z","msg":"Using New Relic for Node.js. Agent version: 8.7.1; Node version: v16.9.1."}
+{"v":0,"level":30,"name":"newrelic","hostname":"catherines-mbp.lan","pid":36877,"time":"2022-01-21T20:52:28.017Z","msg":"Using LegacyContextManager"}
+{"v":0,"level":30,"name":"newrelic","hostname":"catherines-mbp.lan","pid":36877,"time":"2022-01-21T20:52:28.144Z","msg":"Agent state changed from stopped to starting."}
+{"v":0,"level":30,"name":"newrelic","hostname":"catherines-mbp.lan","pid":36877,"time":"2022-01-21T20:52:28.582Z","msg":"Starting New Relic for Node.js connection process."}
+{"v":0,"level":30,"name":"newrelic","hostname":"catherines-mbp.lan","pid":36877,"time":"2022-01-21T20:52:28.583Z","msg":"Agent state changed from starting to connecting."}
+{"v":0,"level":30,"name":"newrelic","hostname":"catherines-mbp.lan","pid":36877,"time":"2022-01-21T20:52:30.730Z","msg":"Agent state changed from connecting to connected."}
+{"v":0,"level":30,"name":"newrelic","hostname":"catherines-mbp.lan","pid":36877,"time":"2022-01-21T20:52:30.730Z","msg":"Connected to collector-009.newrelic.com:443 with agent run ID BdhoUNf999ccADPTGFcuPt5h6x1oAAgBAAAnIQEAAJANAgRXLjyrAwAFOC43LjEAEmNhdGhlcmluZXMtbWJwLmxhbgADU0RD.","component":"collector_api"}
+{"v":0,"level":30,"name":"newrelic","hostname":"catherines-mbp.lan","pid":36877,"time":"2022-01-21T20:52:30.730Z","msg":"Reporting to: https://rpm.newrelic.com/accounts/3396376/applications/1462647979","component":"collector_api"}
+{"v":0,"level":30,"name":"newrelic","hostname":"catherines-mbp.lan","pid":36877,"time":"2022-01-21T20:52:30.732Z","msg":"Valid event_harvest_config received. Updating harvest cycles. {\"report_period_ms\":5000,\"harvest_limits\":{\"error_event_data\":8,\"analytic_event_data\":833,\"custom_event_data\":83}}"}
+{"v":0,"level":30,"name":"newrelic","hostname":"catherines-mbp.lan","pid":36877,"time":"2022-01-21T20:52:30.735Z","msg":"Agent state changed from connected to started."}
+{"v":0,"level":30,"name":"newrelic","hostname":"catherines-mbp.lan","pid":36877,"time":"2022-01-21T20:52:31.740Z","msg":"Starting initial 1000ms harvest."}

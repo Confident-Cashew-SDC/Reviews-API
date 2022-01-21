@@ -8,7 +8,7 @@
     "test:watch": "jest --watch",
     "start": "nodemon ./server/index.js",
     "k6:test": "k6 run ./k6_test/script.js",
-    "forever": "forever start './server/index.js"
+    "forever": "forever start ./server/index.js"
   },
   "repository": {
     "type": "git",
