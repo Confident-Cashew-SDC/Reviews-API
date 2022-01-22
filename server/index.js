@@ -48,7 +48,7 @@ app.get('/reviews', async (req, res) => {
     )
   )
   FROM reviews r
-  WHERE r.product_id=$1
+  WHERE r.product_id IN ($1)
   ${limitCount}`
   let review = {};
   query(text, params)
@@ -98,7 +98,7 @@ app.get('/reviews/meta', async (req, res) => {
       FROM (
       SELECT reviews.product_id, reviews.rating, reviews.recommend, reviews.review_id
       FROM reviews
-      WHERE reviews.product_id = $1
+      WHERE reviews.product_id IN ($1)
   ) rev`
   let meta = {};
   let ratings = {};
