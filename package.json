@@ -7,6 +7,7 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "start": "nodemon ./server/index.js",
+    "start2": "nodemon ./server/index2.js",
     "k6:test": "k6 run ./k6_test/script.js",
     "forever": "forever start ./server/index.js"
   },
