@@ -115,8 +115,13 @@ app.get('/reviews/meta', async (req, res) => {
   )
   FROM reviews
   WHERE product_id = $1`
-  const results = await query(text, params)
-  res.send(results.rows[0].json_build_object)
+  client.query(text, params)
+    .then((data) => {
+      res.status(200).send(data.rows[0].json_build_object)
+    })
+    .catch((err) => {
+      res.status(500).send(err)
+    })
 })
 
 app.post('/reviews', async (req, res) => {
