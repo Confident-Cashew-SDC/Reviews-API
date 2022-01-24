@@ -70,5 +70,5 @@ CREATE INDEX ON reviews_photos(review_id);
 CREATE INDEX ON characteristics_reviews(characteristic_id);
 CREATE INDEX ON characteristics_reviews(review_id);
 CREATE INDEX ON characteristics(product_id);
-CREATE INDEX ON reviews(date);
-CREATE INDEX ON reviews(helpfulness);
+-- CREATE INDEX ON reviews(date);
+-- CREATE INDEX ON reviews(helpfulness);
