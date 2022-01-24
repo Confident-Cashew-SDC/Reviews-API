@@ -23,13 +23,9 @@ app.get(`/${TOKEN}`, (req, res) => {
 app.get('/reviews', async (req, res) => {
   const product_id = req.query.product_id
   const sort = req.query.sort === 'relevant' ? 'helpfulness DESC, DATE DESC' :
-    req.query.sort === 'helpful' ? 'helpfulness DESC' : 'date DESC';
-  const page = req.query.page || req.params.page || 1;
-  // const page = req.query.page || req.params.page || 1;
-  // req.query and req.params are two separate things, if you only want to accept query then do it like this
-  // const page = req.query,page || 1 - no need for the second || statement
-  // req.query.page || req.query.page <- this is useless, same thing as req.query.page
-  const count = req.query.count || req.params.count || 5;
+               req.query.sort === 'helpful' ? 'helpfulness DESC' : 'date DESC';
+  const page = req.query.page || 1;
+  const count = req.query.count || 5;
   const params = [product_id]
   const text =
   `SELECT json_build_object(
